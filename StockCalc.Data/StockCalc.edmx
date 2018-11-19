@@ -11,10 +11,11 @@
             <PropertyRef Name="StockId" />
           </Key>
           <Property Name="Date" Type="date" Nullable="false" />
-          <Property Name="StockId" Type="int" Nullable="false" />
-          <Property Name="Close" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="PER" Type="float" Nullable="false" />
-          <Property Name="StockHolding" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="StockId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Close" Type="float" Nullable="false" />
+          <Property Name="PER" Type="float" />
+          <Property Name="StockHolding" Type="float" Nullable="false" />
+          <Property Name="MarketCap" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="Result">
           <Key>
@@ -22,17 +23,17 @@
             <PropertyRef Name="TDate" />
           </Key>
           <Property Name="StrategyId" Type="int" Nullable="false" />
-          <Property Name="TDate" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="BaseMoney" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="CurrentValue" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="CurrentER" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="TDate" Type="date" Nullable="false" />
+          <Property Name="BaseMoney" Type="float" Nullable="false" />
+          <Property Name="CurrentValue" Type="float" Nullable="false" />
+          <Property Name="CurrentER" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="Stock">
           <Key>
             <PropertyRef Name="StockId" />
           </Key>
-          <Property Name="StockId" Type="int" Nullable="false" />
-          <Property Name="StockName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StockId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StockName" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="Strategy">
           <Key>
@@ -48,12 +49,12 @@
             <PropertyRef Name="BuyDate" />
           </Key>
           <Property Name="StrategyId" Type="int" Nullable="false" />
-          <Property Name="StockId" Type="int" Nullable="false" />
+          <Property Name="StockId" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="BuyDate" Type="date" Nullable="false" />
-          <Property Name="BuyPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="BuyPrice" Type="float" Nullable="false" />
           <Property Name="SellDate" Type="date" />
-          <Property Name="SellPrice" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="TradeER" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SellPrice" Type="float" />
+          <Property Name="TradeER" Type="float" Nullable="false" />
         </EntityType>
         <Association Name="FK_Price_Stock">
           <End Role="Stock" Type="Self.Stock" Multiplicity="1" />
@@ -137,10 +138,11 @@
             <PropertyRef Name="StockId" />
           </Key>
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="StockId" Type="Int32" Nullable="false" />
-          <Property Name="Close" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="PER" Type="Double" Nullable="false" />
-          <Property Name="StockHolding" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="StockId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Close" Type="Double" Nullable="false" />
+          <Property Name="PER" Type="Double" />
+          <Property Name="StockHolding" Type="Double" Nullable="false" />
+          <Property Name="MarketCap" Type="Double" Nullable="false" />
           <NavigationProperty Name="Stock" Relationship="Self.FK_Price_Stock" FromRole="Price" ToRole="Stock" />
         </EntityType>
         <EntityType Name="Result">
@@ -149,18 +151,18 @@
             <PropertyRef Name="TDate" />
           </Key>
           <Property Name="StrategyId" Type="Int32" Nullable="false" />
-          <Property Name="TDate" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="BaseMoney" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="CurrentValue" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="CurrentER" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="TDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="BaseMoney" Type="Double" Nullable="false" />
+          <Property Name="CurrentValue" Type="Double" Nullable="false" />
+          <Property Name="CurrentER" Type="Double" Nullable="false" />
           <NavigationProperty Name="Strategy" Relationship="Self.FK_Result_Strategy" FromRole="Result" ToRole="Strategy" />
         </EntityType>
         <EntityType Name="Stock">
           <Key>
             <PropertyRef Name="StockId" />
           </Key>
-          <Property Name="StockId" Type="Int32" Nullable="false" />
-          <Property Name="StockName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StockId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StockName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Prices" Relationship="Self.FK_Price_Stock" FromRole="Stock" ToRole="Price" />
           <NavigationProperty Name="Trades" Relationship="Self.FK_Trade_Stock" FromRole="Stock" ToRole="Trade" />
         </EntityType>
@@ -180,12 +182,12 @@
             <PropertyRef Name="BuyDate" />
           </Key>
           <Property Name="StrategyId" Type="Int32" Nullable="false" />
-          <Property Name="StockId" Type="Int32" Nullable="false" />
+          <Property Name="StockId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="BuyDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="BuyPrice" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="BuyPrice" Type="Double" Nullable="false" />
           <Property Name="SellDate" Type="DateTime" Precision="0" />
-          <Property Name="SellPrice" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="TradeER" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SellPrice" Type="Double" />
+          <Property Name="TradeER" Type="Double" Nullable="false" />
           <NavigationProperty Name="Stock" Relationship="Self.FK_Trade_Stock" FromRole="Trade" ToRole="Stock" />
           <NavigationProperty Name="Strategy" Relationship="Self.FK_Trade_Strategy" FromRole="Trade" ToRole="Strategy" />
         </EntityType>
@@ -274,6 +276,7 @@
                 <ScalarProperty Name="Close" ColumnName="Close" />
                 <ScalarProperty Name="PER" ColumnName="PER" />
                 <ScalarProperty Name="StockHolding" ColumnName="StockHolding" />
+                <ScalarProperty Name="MarketCap" ColumnName="MarketCap" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

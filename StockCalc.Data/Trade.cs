@@ -15,12 +15,12 @@ namespace StockCalc.Data
     public partial class Trade
     {
         public int StrategyId { get; set; }
-        public int StockId { get; set; }
+        public string StockId { get; set; }
         public System.DateTime BuyDate { get; set; }
-        public decimal BuyPrice { get; set; }
+        public double BuyPrice { get; set; }
         public Nullable<System.DateTime> SellDate { get; set; }
-        public Nullable<decimal> SellPrice { get; set; }
-        public decimal TradeER { get; set; }
+        public Nullable<double> SellPrice { get; set; }
+        public double TradeER { get; set; }
     
         public virtual Stock Stock { get; set; }
         public virtual Strategy Strategy { get; set; }

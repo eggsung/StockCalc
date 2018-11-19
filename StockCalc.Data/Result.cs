@@ -15,10 +15,10 @@ namespace StockCalc.Data
     public partial class Result
     {
         public int StrategyId { get; set; }
-        public string TDate { get; set; }
-        public string BaseMoney { get; set; }
-        public string CurrentValue { get; set; }
-        public string CurrentER { get; set; }
+        public System.DateTime TDate { get; set; }
+        public double BaseMoney { get; set; }
+        public double CurrentValue { get; set; }
+        public double CurrentER { get; set; }
     
         public virtual Strategy Strategy { get; set; }
     }
